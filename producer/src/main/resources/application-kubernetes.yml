@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+  application:
+    name: producer
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka-service:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      retries: 3
