@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: producer
+  kafka:
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
