@@ -190,10 +190,10 @@ cd ../consumer && docker build -t consumer:latest .
 
 2. **Deploy in order:**
 ```bash
-kubectl apply -f kafka-deployment.yaml
+kubectl apply -f kafka-deployment.yml
 kubectl wait --for=condition=available --timeout=300s deployment/kafka
-kubectl apply -f producer-deployment.yaml
-kubectl apply -f consumer-deployment.yaml
+kubectl apply -f producer-deployment.yml
+kubectl apply -f consumer-deployment.yml
 ```
 
 ## Scaling

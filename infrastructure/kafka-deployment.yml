@@ -1,0 +1,24 @@
+replicaCount: 1
+
+image:
+  repository: bitnami/kafka
+  tag: latest
+
+fullnameOverride: kafka
+allowPlaintextListener: true
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+
+controller:
+  replicaCount: 1
+
+kraft:
+  enabled: true
+  clusterId: my-cluster-id
+
+service:
+  type: ClusterIP
+  ports:
+    client: 9092

@@ -1,37 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: producer
+  name: consumer
   labels:
-    app: producer
+    app: consumer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: producer
+      app: consumer
   template:
     metadata:
       labels:
-        app: producer
+        app: consumer
     spec:
       containers:
-      - name: producer
-        image: producer:latest
+      - name: consumer
+        image: consumer:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "kubernetes"
-        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-          value: "kafka-service:9092"
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
+        envFrom:
+          - configMapRef:
+              name: kafka-config
         readinessProbe:
           httpGet:
             path: /ping
@@ -48,12 +39,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: producer-service
+  namespace: producer-consumer-kafka-demo
+  name: consumer-service
   labels:
-    app: producer
+    app: consumer
 spec:
   selector:
-    app: producer
+    app: consumer
   ports:
   - name: http
     port: 8080

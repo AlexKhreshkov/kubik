@@ -5,6 +5,7 @@ spring:
   application:
     name: producer
   kafka:
+    bootstrap-servers: kafka.producer-consumer-kafka-demo.svc.cluster.local:9092
     consumer:
       group-id: my-group
       auto-offset-reset: earliest
