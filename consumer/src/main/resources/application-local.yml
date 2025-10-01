@@ -6,8 +6,9 @@ spring:
     activate:
       on-profile: local
   application:
-    name: producer
+    name: consumer
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
       group-id: my-group
       auto-offset-reset: earliest
